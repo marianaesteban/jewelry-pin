@@ -1,0 +1,27 @@
+{
+    "root":true,
+    "extends":[
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:prettier/recommended"
+    ],
+    "plugins":[
+        "react",
+        "prettier",
+        "react-hooks",
+        "jest"
+    ],
+    "rules":{
+        "no-console": 1,
+        "object-curly-spacing": [2, "always"],
+        "react-hooks/rules-of-hooks": "error",
+        "comma-dangle":"off",
+        "function-paren-newline":"off",
+        "global-require":"off",
+        "import/no-dynamic-require":"off",
+        "no-inner-declarations":"off",
+        "class-methods-use-this":"off",
+        "import/extensions":"off",
+        "import/prefer-default-export":"off"
+    }
+}
