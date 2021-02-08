@@ -1,16 +1,17 @@
 import React from 'react';
-import { IProductsEntity } from 'types/api/Product';
+import { IProducts, IProductsEntity } from 'types/api/Product';
 import Masonry from 'components/Masonry';
 import ProductCard from 'components/ProductCard';
 import { useProductsContext } from 'contexts/GlobalState';
 
-const Products = () => {
-  const { products, isFetching } = useProductsContext();
+const Favorites = () => {
+  const { isFetching, favorites } = useProductsContext();
+
   if (isFetching) return <div>Loading...</div>;
   return (
     <>
       <Masonry>
-        {products.map((product: IProductsEntity) => (
+        {favorites.map((product: IProductsEntity) => (
           <ProductCard
             key={product.id}
             productId={product.id}
@@ -24,4 +25,4 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default Favorites;

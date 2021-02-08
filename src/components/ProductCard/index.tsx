@@ -9,12 +9,13 @@ interface ICard extends React.HTMLAttributes<HTMLDivElement> {
   productImages?: IVariantImagesEntity[] | null;
   productName: string;
   productSlug: string;
+  productId: number;
 }
 
 const BASE_URL = 'https://mejuri.com';
 const SHOP_URL = 'https://mejuri.com/shop/products/';
 
-const ProductCard = ({ productImages, productName, productSlug, ...restProps }: ICard) => {
+const ProductCard = ({ productId, productImages, productName, productSlug, ...restProps }: ICard) => {
   return (
     <Container {...restProps}>
       {productImages && (
@@ -29,7 +30,7 @@ const ProductCard = ({ productImages, productName, productSlug, ...restProps }: 
         />
       )}
       <HoverContent>
-        <LikeButton />
+        <LikeButton productId={productId} />
         <Caption>{productName}</Caption>
         <Badge as='a' href={`${SHOP_URL}${productSlug}`} target='_blank' rel='noopener noreferrer'>
           <ExternalLink />

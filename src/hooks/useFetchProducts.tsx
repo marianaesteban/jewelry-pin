@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import { IProducts } from 'types/api/Product';
+import { API_ENDPOINTS } from './apiEndpoints';
 
-export const useFetchProducts = () => {
-  const [data, setData] = useState<any>([]); //TODO: Type data response
+const useFetchProducts = (endpoint: string) => {
+  const [data, setData] = useState<IProducts[]>([]);
   const [isFetching, setIsFetching] = useState<boolean>(false);
+  const apiUrl = `${API_ENDPOINTS.BASE_URL}${endpoint}.json`;
 
   useEffect(() => {
     setIsFetching(true);
-    const apiUrl = `http://mejuri-fe-challenge.s3-website-us-east-1.amazonaws.com/shop_all.json`;
     fetch(apiUrl)
       .then(res => res.json())
       .then(products => {
@@ -17,3 +19,10 @@ export const useFetchProducts = () => {
 
   return { products: data, isFetching: isFetching };
 };
+
+export const useFetchAllProducts = () => useFetchProducts(API_ENDPOINTS.ALL);
+export const useFetchBracelets = () => useFetchProducts(API_ENDPOINTS.BRACELETS);
+export const useFetchEarrings = () => useFetchProducts(API_ENDPOINTS.EARRIGNS);
+export const useFetchSingleEarrings = () => useFetchProducts(API_ENDPOINTS.SINGLE_EARRIGNS);
+export const useFetchPendants = () => useFetchProducts(API_ENDPOINTS.PENDANTS);
+export const useFetchRings = () => useFetchProducts(API_ENDPOINTS.RINGS);

@@ -1,3 +1,10 @@
+const breakpoints = {
+  xs: '480px',
+  sm: '768px',
+  md: '992px',
+  lg: '1280px'
+};
+
 const main = {
   fontSizes: {
     default: '14px'
@@ -16,7 +23,8 @@ const main = {
     gray: '#8a8a8a',
     primary: '#ead2c2',
     secondary: '#faf7f0'
-  }
+  },
+  device: breakpoints
 };
 
 export const themes = {
