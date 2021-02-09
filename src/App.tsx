@@ -10,14 +10,16 @@ const App = () => {
     <Router>
       <ProductsProvider>
         <Header />
-        <Switch>
-          <Route path='/favorites'>
-            <Favorites />
-          </Route>
-          <Route path='/'>
-            <Products />
-          </Route>
-        </Switch>
+        <main>
+          <Switch>
+            <Route path='/favorites'>
+              <Favorites />
+            </Route>
+            <Route path='/'>
+              <Products />
+            </Route>
+          </Switch>
+        </main>
       </ProductsProvider>
     </Router>
   );

@@ -18,6 +18,8 @@ export const Container = styled.header`
 `;
 
 export const Menu = styled.nav`
+  max-width: 1920px;
+  padding: 0 20px;
   > ul {
     all: unset;
   }

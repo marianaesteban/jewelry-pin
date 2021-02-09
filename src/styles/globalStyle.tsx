@@ -19,7 +19,7 @@ const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
   }
 
   main {
-    max-width: 1110px;
+    max-width: 1920px;
     margin: 0 auto;
     padding: 0 20px;
   }

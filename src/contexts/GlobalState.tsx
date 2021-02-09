@@ -1,4 +1,4 @@
-import React, { createContext, useState, useCallback, useEffect, useMemo } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import {
   useFetchAllProducts,
   useFetchBracelets,
@@ -12,15 +12,17 @@ import { IProducts, IProductsEntity } from 'types/api/Product';
 interface IContextValue {
   isFetching: boolean;
   products: IProducts[];
+  allProducts: IProducts[];
+  bracelets: IProducts[];
+  earrings: IProducts[];
+  singleEarrings: IProducts[];
+  pendants: IProducts[];
+  rings: IProducts[];
   favorites: IProducts[];
-  addFavorite: (favorite: number) => void;
   loadMoreProducts: () => void;
-  getAllProducts: (products: IProducts[]) => void;
-  getBracelets: (products: IProducts[]) => void;
-  getEarrings: (products: IProducts[]) => void;
-  getSingleEarrings: (products: IProducts[]) => void;
-  getPendants: (products: IProducts[]) => void;
-  getRings: (products: IProducts[]) => void;
+  hasMoreProducts: boolean;
+  getProducts: (products: IProducts[]) => void;
+  addFavorite: (favorite: number) => void;
 }
 
 interface IProvider {
@@ -30,15 +32,17 @@ interface IProvider {
 const initialState = {
   isFetching: false,
   products: [],
+  allProducts: [],
+  bracelets: [],
+  earrings: [],
+  singleEarrings: [],
+  pendants: [],
+  rings: [],
   favorites: [],
-  addFavorite: () => [],
   loadMoreProducts: () => {},
-  getAllProducts: () => [],
-  getBracelets: () => [],
-  getEarrings: () => [],
-  getSingleEarrings: () => [],
-  getPendants: () => [],
-  getRings: () => []
+  hasMoreProducts: false,
+  getProducts: () => [],
+  addFavorite: () => []
 };
 
 const ProductsContext = createContext<IContextValue>(initialState);
@@ -47,6 +51,7 @@ export const ProductsProvider = ({ children }: IProvider) => {
   const [products, setProducts] = useState<IProducts[]>([]);
   const [productLimit, setProductLimit] = useState<number>(15);
   const [favoritesIds, setFavoritesIds] = useState<number[]>([]);
+  const [hasMoreProducts, setHasMoreProducts] = useState<boolean>(false);
   const { products: allProducts, isFetching } = useFetchAllProducts();
   const { products: bracelets } = useFetchBracelets();
   const { products: earrings } = useFetchEarrings();
@@ -65,48 +70,28 @@ export const ProductsProvider = ({ children }: IProvider) => {
     );
   };
 
-  const loadMoreProducts = () => setProductLimit((current: number) => current + 15);
+  const loadMoreProducts = () => {
+    setProductLimit((current: number) => current + 15);
+    setHasMoreProducts(filterList(products).length > productLimit);
+  };
 
-  const filteredList = useMemo(() => filterList(products).slice(0, productLimit), [products, productLimit]);
-  const favoritesList = useMemo(
-    () =>
-      filterList(allProducts)
-        .filter(({ id }: IProducts) => favoritesIds.includes(id))
-        .slice(0, productLimit),
-    [favoritesIds]
-  );
+  const filteredList = filterList(products).slice(0, productLimit);
+  const favoritesList = filterList(allProducts)
+    .filter(({ id }: IProducts) => favoritesIds.includes(id))
+    .slice(0, productLimit);
 
   useEffect(() => {
     setProducts(allProducts);
-  }, [allProducts]);
+    setHasMoreProducts(filterList(allProducts).length > productLimit);
+  }, [allProducts, hasMoreProducts]);
 
   //TODO: CONSIDER USING USEREDUCER FOR HANDLING THIS
-  const addFavorite = useCallback(favorite => setFavoritesIds((current: number[]) => [...current, favorite]), [setFavoritesIds, products]);
+  const addFavorite = (favorite: number) => setFavoritesIds((current: number[]) => [...current, favorite]);
 
-  //TODO: THIS COULD PROBABLY BE IMPROVED TO PREVENT REPETITION
-  const getBracelets = () => {
-    setProducts(bracelets);
+  const getProducts = (productList: IProducts[]) => {
+    setProducts(productList);
     setProductLimit(15);
-  };
-  const getEarrings = () => {
-    setProducts(earrings);
-    setProductLimit(15);
-  };
-  const getSingleEarrings = () => {
-    setProducts(singleEarrings);
-    setProductLimit(15);
-  };
-  const getPendants = () => {
-    setProducts(pendants);
-    setProductLimit(15);
-  };
-  const getRings = () => {
-    setProducts(rings);
-    setProductLimit(15);
-  };
-  const getAllProducts = () => {
-    setProducts(allProducts);
-    setProductLimit(15);
+    setHasMoreProducts(filterList(products).length > productLimit);
   };
 
   return (
@@ -114,14 +99,16 @@ export const ProductsProvider = ({ children }: IProvider) => {
       value={{
         isFetching: isFetching,
         products: filteredList,
+        allProducts: allProducts,
+        bracelets: bracelets,
+        earrings: earrings,
+        singleEarrings: singleEarrings,
+        pendants: pendants,
+        rings: rings,
         favorites: favoritesList,
         loadMoreProducts,
-        getAllProducts,
-        getBracelets,
-        getEarrings,
-        getSingleEarrings,
-        getPendants,
-        getRings,
+        hasMoreProducts,
+        getProducts,
         addFavorite
       }}
     >
