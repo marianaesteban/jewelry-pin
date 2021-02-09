@@ -7,27 +7,9 @@ import {
   useFetchPendants,
   useFetchRings
 } from 'hooks/useFetchProducts';
-import { IProducts, IProductsEntity } from 'types/api/Product';
-
-interface IContextValue {
-  isFetching: boolean;
-  products: IProducts[];
-  allProducts: IProducts[];
-  bracelets: IProducts[];
-  earrings: IProducts[];
-  singleEarrings: IProducts[];
-  pendants: IProducts[];
-  rings: IProducts[];
-  favorites: IProducts[];
-  loadMoreProducts: () => void;
-  hasMoreProducts: boolean;
-  getProducts: (products: IProducts[]) => void;
-  addFavorite: (favorite: number) => void;
-}
-
-interface IProvider {
-  children: React.ReactNode;
-}
+import { IProducts } from 'types/api/Product';
+import { IContextValue, IProvider } from 'types/Context';
+import { filterList } from 'helpers/listHelper';
 
 const initialState = {
   isFetching: false,
@@ -59,34 +41,31 @@ export const ProductsProvider = ({ children }: IProvider) => {
   const { products: pendants } = useFetchPendants();
   const { products: rings } = useFetchRings();
 
-  const filterList = (products: IProducts[]) => {
-    const productList = products
-      .map((category: IProducts) => (!category.products ? [] : category.products.map((product: IProductsEntity) => product)))
-      .flat();
-
-    return productList.filter(
-      (item: IProductsEntity, index: number, array: IProducts[]) =>
-        array.findIndex((element: IProducts) => element.id === item.id) === index
-    );
-  };
+  useEffect(() => {
+    setProducts(allProducts);
+    setHasMoreProducts(filterList(allProducts).length > productLimit);
+  }, [allProducts]);
 
   const loadMoreProducts = () => {
     setProductLimit((current: number) => current + 15);
     setHasMoreProducts(filterList(products).length > productLimit);
   };
 
+  //Limiting array of loaded products
   const filteredList = filterList(products).slice(0, productLimit);
   const favoritesList = filterList(allProducts)
     .filter(({ id }: IProducts) => favoritesIds.includes(id))
     .slice(0, productLimit);
 
-  useEffect(() => {
-    setProducts(allProducts);
-    setHasMoreProducts(filterList(allProducts).length > productLimit);
-  }, [allProducts, hasMoreProducts]);
-
   //TODO: CONSIDER USING USEREDUCER FOR HANDLING THIS
-  const addFavorite = (favorite: number) => setFavoritesIds((current: number[]) => [...current, favorite]);
+  const addFavorite = (favorite: number) => {
+    //Check if favorite is already added
+    const isFavorite = favoritesIds.some(favoriteId => favoriteId === favorite);
+    //If already added then remove from array, if not, add it
+    isFavorite
+      ? setFavoritesIds((current: number[]) => current.filter(favoriteId => favoriteId !== favorite))
+      : setFavoritesIds((current: number[]) => [...current, favorite]);
+  };
 
   const getProducts = (productList: IProducts[]) => {
     setProducts(productList);

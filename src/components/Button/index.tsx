@@ -2,7 +2,7 @@ import styled from 'styled-components/macro';
 import { lighten, timingFunctions } from 'polished';
 
 const Button = styled.button`
-  display: flex;
+  display: inline-flex;
   padding: 5px 12px;
   font-size: 14px;
   line-height: 30px;
@@ -14,6 +14,7 @@ const Button = styled.button`
   transition: all ${timingFunctions('easeInQuad')} 0.25s;
   text-align: center;
   text-transform: uppercase;
+  text-decoration: none;
   font-weight: ${({ theme }) => theme.fontWeights.normal};
   letter-spacing: 1px;
   cursor: pointer;

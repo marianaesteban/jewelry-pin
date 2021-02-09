@@ -5,7 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { IProducts } from 'types/api/Product';
 
 const Header = () => {
-  const [activeFilter, setActiveFilter] = useState('all');
+  const [activeFilter, setActiveFilter] = useState('');
   const { favorites, getProducts, allProducts, bracelets, earrings, singleEarrings, pendants, rings } = useProductsContext();
   const location = useLocation();
 
@@ -21,7 +21,10 @@ const Header = () => {
     <Container>
       <Menu>
         <ul>
-          <MenuItem isActive={activeFilter === 'all'} onClick={() => handleFilter(allProducts, 'all')}>
+          <MenuItem
+            isActive={activeFilter === 'all' || (location.pathname === '/' && activeFilter === '')}
+            onClick={() => handleFilter(allProducts, 'all')}
+          >
             <Link to={`/`}>All</Link>
           </MenuItem>
           <MenuItem isActive={activeFilter === 'bracelets'} onClick={() => handleFilter(bracelets, 'bracelets')}>
@@ -39,10 +42,7 @@ const Header = () => {
           <MenuItem isActive={activeFilter === 'rings'} onClick={() => handleFilter(rings, 'rings')}>
             <Link to={`/`}>Rings</Link>
           </MenuItem>
-          <MenuItem
-            isActive={activeFilter === 'favorites' || location.pathname === '/favorites'}
-            onClick={() => handleFilter(allProducts, 'favorites')}
-          >
+          <MenuItem isActive={location.pathname === '/favorites'} onClick={() => handleFilter(allProducts, '')}>
             <Link to={`/favorites`}>Favorites ({favorites.length})</Link>
           </MenuItem>
         </ul>
