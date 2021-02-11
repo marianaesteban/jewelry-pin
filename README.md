@@ -39,7 +39,7 @@ Runs eslint checks
 
 ### `yarn lint --fix`
 
-Runs eslint checks and fixes
+Runs eslint checks and fixes them if possible
 
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 

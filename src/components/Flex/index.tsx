@@ -9,6 +9,7 @@ interface IFlex {
   flexWrap?: 'nowrap' | 'wrap' | 'wrap-reverse';
   justifyContent?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'space-evenly';
   width?: string;
+  height?: string;
 }
 
 const Flex = styled.div<IFlex>`
@@ -28,6 +29,7 @@ const Flex = styled.div<IFlex>`
     `}
   justify-content: ${({ justifyContent }) => justifyContent};
   width: ${({ width }) => width};
+  height: ${({ height }) => height};
 `;
 
 Flex.defaultProps = {
@@ -38,7 +40,8 @@ Flex.defaultProps = {
   flexFlow: null,
   flexWrap: 'wrap',
   justifyContent: 'flex-start',
-  width: 'auto'
+  width: 'auto',
+  height: 'auto'
 };
 
 export default Flex;

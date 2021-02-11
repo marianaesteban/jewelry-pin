@@ -8,12 +8,18 @@ import Masonry from 'components/Masonry';
 import ProductCard from 'components/ProductCard';
 import Button from 'components/Button';
 import Flex from 'components/Flex';
+import Loading from 'components/Loading';
 import { Message } from './styles';
 
 const Favorites = () => {
   const { isFetching, loadMoreProducts, hasMoreProducts, favorites } = useProductsContext();
 
-  if (isFetching) return <Flex alignItems='center'>Loading...</Flex>;
+  if (isFetching)
+    return (
+      <Flex alignItems='center'>
+        <Loading />
+      </Flex>
+    );
   return (
     <>
       {favorites.length === 0 ? (

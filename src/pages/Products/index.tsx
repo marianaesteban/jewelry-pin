@@ -3,11 +3,18 @@ import { IProductsEntity } from 'types/api/Product';
 import { Waypoint } from 'react-waypoint';
 import Masonry from 'components/Masonry';
 import ProductCard from 'components/ProductCard';
+import Flex from 'components/Flex';
+import Loading from 'components/Loading';
 import { useProductsContext } from 'contexts/GlobalState';
 
 const Products = () => {
   const { products, loadMoreProducts, hasMoreProducts, isFetching } = useProductsContext();
-  if (isFetching) return <div>Loading...</div>;
+  if (isFetching)
+    return (
+      <Flex alignItems='center'>
+        <Loading />
+      </Flex>
+    );
   return (
     <>
       <Masonry>
