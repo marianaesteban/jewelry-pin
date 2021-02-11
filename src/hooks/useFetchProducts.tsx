@@ -15,7 +15,7 @@ const useFetchProducts = (endpoint: string) => {
         setData(products);
         setIsFetching(false);
       });
-  }, [setData, setIsFetching]);
+  }, [setData, setIsFetching, apiUrl]);
 
   return { products: data, isFetching: isFetching };
 };

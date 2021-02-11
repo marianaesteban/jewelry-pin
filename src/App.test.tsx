@@ -8,10 +8,10 @@ describe('GIVEN App', () => {
   beforeEach(() => {
     wrapper = render(<App />);
   });
-  test('should render 1 header', () => {
+  it('should render 1 header', () => {
     expect(wrapper.getAllByTestId('app-header')).toHaveLength(1);
   });
-  test('should render 1 main section', () => {
+  it('should render 1 main section', () => {
     expect(wrapper.getAllByTestId('app-main')).toHaveLength(1);
   });
 });

@@ -31,10 +31,10 @@ describe('GIVEN App', () => {
       </ProductsContext.Provider>
     );
   });
-  test('should render 1 header', () => {
+  it('should render a button', () => {
     expect(wrapper.getByRole('button')).toBeInTheDocument();
   });
-  test('should render 1 header', () => {
+  it('should render call addFavorite on click', () => {
     const submitButton = wrapper.getByRole('button');
     fireEvent.click(submitButton);
 

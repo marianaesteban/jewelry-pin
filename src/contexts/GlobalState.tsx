@@ -43,9 +43,10 @@ export const ProductsProvider = ({ children }: IProvider) => {
 
   useEffect(() => {
     setProducts(allProducts);
-    setHasMoreProducts(filterList(allProducts).length > productLimit);
+    setHasMoreProducts(filterList(allProducts).length > 15);
   }, [allProducts]);
 
+  //TODO: CONSIDER USING USEREDUCER FOR HANDLING THIS
   const loadMoreProducts = () => {
     setProductLimit((current: number) => current + 15);
     setHasMoreProducts(filterList(products).length > productLimit);
@@ -99,7 +100,7 @@ export const ProductsProvider = ({ children }: IProvider) => {
 export const useProductsContext = (): any => {
   const context = React.useContext(ProductsContext);
   if (!context) {
-    throw new Error('useFavoritesContext must be used in a component within a FavoritesProvider.');
+    throw new Error('useProductsContext must be used in a component within a ProductsProvider.');
   }
   return context;
 };

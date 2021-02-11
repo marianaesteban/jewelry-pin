@@ -1,7 +1,11 @@
 {
-    "root":true,
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
     "extends":[
-        "eslint:recommended",
+        "react-app",
         "plugin:react/recommended",
         "plugin:prettier/recommended"
     ],

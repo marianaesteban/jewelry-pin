@@ -61,16 +61,16 @@ describe('GIVEN ProductCard', () => {
     wrapper = setup(initialProps);
   });
 
-  test('should render a product image', () => {
+  it('should render a product image', () => {
     expect(wrapper.getByRole('img')).toBeInTheDocument();
     expect(wrapper.getByRole('img').getAttribute('src')).toBe(`https://mejuri.com${initialProps.productImages[0].attachment_url_medium}`);
   });
 
-  test('should render the product name', () => {
+  it('should render the product name', () => {
     expect(wrapper.getByText('Bold Hoops')).toBeInTheDocument();
   });
 
-  test('should render the product link', () => {
+  it('should render the product link', () => {
     expect(wrapper.getByText('mejuri.com').closest('a')?.href).toBe(`https://mejuri.com/shop/products/${initialProps.productSlug}`);
   });
 });
