@@ -18,7 +18,12 @@ export const Container = styled.header`
 `;
 
 export const Menu = styled.nav`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
   max-width: 1920px;
+  margin: 0 auto;
   padding: 0 20px;
   > ul {
     all: unset;
@@ -28,6 +33,7 @@ export const Menu = styled.nav`
 export const MenuItem = styled.li<IMenuItem>`
   all: unset;
   display: inline-flex;
+  align-items: center;
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.colors.gray};
   margin: 0 5px;

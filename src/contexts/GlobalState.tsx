@@ -27,7 +27,7 @@ const initialState = {
   addFavorite: () => []
 };
 
-const ProductsContext = createContext<IContextValue>(initialState);
+export const ProductsContext = createContext<IContextValue>(initialState);
 
 export const ProductsProvider = ({ children }: IProvider) => {
   const [products, setProducts] = useState<IProducts[]>([]);

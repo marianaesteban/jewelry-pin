@@ -5,13 +5,12 @@ import Badge from 'components/Badge';
 import LikeButton from './components/LikeButton';
 import { Container, HoverContent, Image, Caption } from './styles';
 
-interface ICard extends React.HTMLAttributes<HTMLDivElement> {
+export interface ICard extends React.HTMLAttributes<HTMLDivElement> {
   productImages?: IVariantImagesEntity[] | null;
   productName: string;
   productSlug: string;
   productId: number;
 }
-
 const BASE_URL = 'https://mejuri.com';
 const SHOP_URL = 'https://mejuri.com/shop/products/';
 
@@ -20,11 +19,11 @@ const ProductCard = ({ productId, productImages, productName, productSlug, ...re
     <Container {...restProps}>
       {productImages && (
         <Image
-          srcSet={`${BASE_URL}${productImages[0].attachment_url_small} 480w,
-          ${BASE_URL}${productImages[0].attachment_url_medium} 800w`}
+          srcSet={`${BASE_URL}${productImages[0].attachment_url_medium} 480w,
+          ${BASE_URL}${productImages[0].attachment_url_large} 800w`}
           sizes='(max-width: 600px) 480px,
-            800px'
-          src={`${BASE_URL}${productImages[0].attachment_url_original}`}
+          1280px'
+          src={`${BASE_URL}${productImages[0].attachment_url_medium}`}
           alt={productName}
           loading='lazy'
         />

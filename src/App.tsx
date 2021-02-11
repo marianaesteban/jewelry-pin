@@ -10,7 +10,7 @@ const App = () => {
     <Router>
       <ProductsProvider>
         <Header />
-        <main>
+        <main data-testid='app-main'>
           <Switch>
             <Route path='/favorites'>
               <Favorites />

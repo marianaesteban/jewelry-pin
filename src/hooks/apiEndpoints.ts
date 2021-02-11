@@ -1,4 +1,4 @@
-const BASE_URL = 'http://mejuri-fe-challenge.s3-website-us-east-1.amazonaws.com/';
+const BASE_URL = 'https://s3.amazonaws.com/mejuri-fe-challenge/';
 const ALL = 'shop_all';
 const BRACELETS = 'bracelets';
 const EARRIGNS = 'earrings';

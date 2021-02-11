@@ -21,7 +21,7 @@ const Products = () => {
           />
         ))}
       </Masonry>
-      {hasMoreProducts && <Waypoint onEnter={loadMoreProducts} />}
+      <Waypoint onEnter={loadMoreProducts}>{hasMoreProducts ? <div>Loading...</div> : null}</Waypoint>
     </>
   );
 };

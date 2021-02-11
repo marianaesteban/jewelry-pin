@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components/macro';
 
-interface IProps {
+interface IFlex {
   alignContent?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'stretch';
   alignItems?: 'stretch' | 'flex-start' | 'flex-end' | 'center' | 'baseline';
   display?: 'inline-flex' | 'flex';
@@ -11,19 +11,19 @@ interface IProps {
   width?: string;
 }
 
-const Flex = styled.div<IProps>`
+const Flex = styled.div<IFlex>`
   align-content: ${({ alignContent }) => alignContent};
   align-items: ${({ alignItems }) => alignItems};
   display: ${({ display }) => display};
   ${({ flexFlow }) =>
     !flexFlow &&
-    css<IProps>`
+    css<IFlex>`
       flex-direction: ${({ flexDirection }) => flexDirection};
       flex-wrap: ${({ flexWrap }) => flexWrap};
     `}
   ${({ flexFlow }) =>
     flexFlow &&
-    css<IProps>`
+    css<IFlex>`
       flex-flow: ${flexFlow};
     `}
   justify-content: ${({ justifyContent }) => justifyContent};

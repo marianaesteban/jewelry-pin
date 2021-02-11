@@ -8,7 +8,7 @@ const delayAnimation = (i: number, duration: number) => `
 
 const getDelayAnimation = () => {
   let str = '';
-  for (let index = 0; index < 10; index += 1) {
+  for (let index = 0; index < 15; index += 1) {
     str += delayAnimation(index, index);
   }
   return str;
@@ -44,8 +44,8 @@ const Masonry = styled.div`
     grid-auto-rows: calc((100vw / 3) - ((3 - 1) * 10px));
   }
   @media (max-width: ${({ theme }) => theme.device.xs}) {
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: calc((100vw / 2) - 10px);
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
   }
 `;
 

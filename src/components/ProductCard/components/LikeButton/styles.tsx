@@ -1,10 +1,10 @@
 import styled from 'styled-components/macro';
 import { lighten, transparentize } from 'polished';
 import Button from 'components/Button';
-import { Container as ProductCard } from 'components/ProductCard/styles';
 
 export const StyledLikeButton = styled(Button)`
   padding: 5px;
+  align-self: flex-end;
   background-color: ${({ theme }) => lighten(0.95, theme.colors.black)};
   border: 1px solid transparent;
   box-shadow: 0 1px 4px ${({ theme }) => transparentize(0.75, theme.colors.black)};
@@ -19,7 +19,7 @@ export const StyledLikeButton = styled(Button)`
     height: auto;
   }
 
-  ${ProductCard} & {
-    align-self: flex-end;
+  @media (max-width: ${({ theme }) => theme.device.sm}) {
+    padding: 8px;
   }
 `;

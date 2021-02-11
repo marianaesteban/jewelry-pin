@@ -27,6 +27,10 @@ export const HoverContent = styled.div`
   ${Container}:hover & {
     opacity: 1;
   }
+  @media (max-width: ${({ theme }) => theme.device.sm}) {
+    background: none;
+    opacity: 1;
+  }
 `;
 
 export const Caption = styled.figcaption`
@@ -34,4 +38,8 @@ export const Caption = styled.figcaption`
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.colors.black};
   text-align: center;
+  @media (max-width: ${({ theme }) => theme.device.sm}) {
+    margin: auto 0 15px 0;
+    text-align: left;
+  }
 `;

@@ -1,9 +1,17 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { RenderResult } from '@testing-library/react';
+import { render } from 'helpers/testHelper';
 import App from './App';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe('GIVEN App', () => {
+  let wrapper: RenderResult;
+  beforeEach(() => {
+    wrapper = render(<App />);
+  });
+  test('should render 1 header', () => {
+    expect(wrapper.getAllByTestId('app-header')).toHaveLength(1);
+  });
+  test('should render 1 main section', () => {
+    expect(wrapper.getAllByTestId('app-main')).toHaveLength(1);
+  });
 });

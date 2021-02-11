@@ -2,12 +2,12 @@ import styled from 'styled-components/macro';
 import { transparentize, lighten, timingFunctions } from 'polished';
 import { Container as ProductCard } from 'components/ProductCard/styles';
 
-interface IProps {
+interface IBadge {
   href?: string;
   to?: string;
 }
 
-const Badge = styled.div<IProps>`
+const Badge = styled.div<IBadge>`
   display: flex;
   padding: 5px 12px;
   font-size: 12px;

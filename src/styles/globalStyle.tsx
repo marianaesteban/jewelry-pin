@@ -5,8 +5,6 @@ import { themes } from './theme';
 type ThemeType = typeof themes.main;
 
 const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
-  @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;400;600&display=swap');
-
   ${normalize()}
 
   body {
